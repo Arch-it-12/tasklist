@@ -7,5 +7,4 @@ adminBP = Blueprint("admin", __name__, url_prefix="/admin")
 
 mainBP.add_url_rule("/", "index", controllers.index)
 mainBP.add_url_rule("/home", "home", controllers.home)
-
-adminBP.add_url_rule("/", "admin_home", admin_controllers.admin_home)
+mainBP.add_url_rule("/admin", "admin", controllers.admin_panel)

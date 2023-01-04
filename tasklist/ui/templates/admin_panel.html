@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Home
+    Admin Panel
 {% endblock title %}
 
 
@@ -21,7 +21,7 @@
         <div class="container-fluid d-flex justify-content-between">
             <img src="../static/icecream.webp" style="height: 8vh" class="m-2" alt="Jakes Logo">
             <div class="text-center my-auto">
-                <p class="fs-1 fw-bold text-light my-auto">EMPLOYEE CHECKLIST</p>
+                <p class="fs-1 fw-bold text-light my-auto">ADMIN PANEL</p>
             </div>
             <img src="../static/icecream.webp" style="height: 8vh" class="m-2 invisible" alt="Jakes Logo">
         </div>
@@ -31,18 +31,14 @@
         <div class="container-fluid d-flex mt-2">
             <div class="row flex-grow-1">
                 <div class="col-lg flex-grow-1 ps-lg-4 pe-lg-3">
-                    <a href="{{ url_for("main.home") }}"
-                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light fs-scale" style="height: 30vh">
-                        <i class="bi bi-person-fill-gear icon"></i>
-                        <p class="mb-0">ADMIN</p>
-                    </a>
+                    <div class="container bg-secondary">
+                        <div class="table"></div>
+                    </div>
                 </div>
                 <div class="col-lg flex-grow-1 ps-lg-3 pe-lg-4">
-                    <a href="{{ url_for("main.home") }}"
-                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light fs-scale" style="height: 30vh">
-                        <i class="bi bi-people-fill icon"></i>
-                        <p class="mb-0">EMPLOYEES</p>
-                    </a>
+                    <div class="container bg-secondary">
+                        a
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,3 +7,7 @@ def index():
 
 def home():
     return render_template("home.html")
+
+
+def admin_panel():
+    return render_template("admin_panel.html")
