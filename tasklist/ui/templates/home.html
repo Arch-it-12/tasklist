@@ -12,14 +12,15 @@
             background-color: grey;
             background-blend-mode: multiply;
             background-size: 197.99px 197.99px;
-            font-family: raleway, sans-serif;
         }
     </style>
 {% endblock head %}
 {% block content %}
     <section class="pink">
         <div class="container-fluid d-flex justify-content-between">
-            <img src="../static/icecream.webp" style="height: 8vh" class="m-2" alt="Jakes Logo">
+            <a href="{{ url_for("main.home") }}">
+                <img src="../static/icecream.webp" style="height: 8vh" class="m-2" alt="Jakes Logo">
+            </a>
             <div class="text-center my-auto">
                 <p class="fs-1 fw-bold text-light my-auto">EMPLOYEE CHECKLIST</p>
             </div>
@@ -31,17 +32,21 @@
         <div class="container-fluid d-flex mt-2">
             <div class="row flex-grow-1">
                 <div class="col-lg flex-grow-1 ps-lg-4 pe-lg-3">
-                    <a href="{{ url_for("main.home") }}"
-                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light fs-scale" style="height: 30vh">
-                        <i class="bi bi-person-fill-gear icon"></i>
-                        <p class="mb-0">ADMIN</p>
+                    <a href="{{ url_for("main.admin") }}"
+                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light">
+                        <span class="d-inline fs-2">
+                            <i class="bi bi-person-fill-gear"></i>
+                            ADMIN
+                        </span>
                     </a>
                 </div>
                 <div class="col-lg flex-grow-1 ps-lg-3 pe-lg-4">
-                    <a href="{{ url_for("main.home") }}"
-                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light fs-scale" style="height: 30vh">
-                        <i class="bi bi-people-fill icon"></i>
-                        <p class="mb-0">EMPLOYEES</p>
+                    <a href="{{ url_for("main.users") }}"
+                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light">
+                        <span class="d-inline fs-2">
+                            <i class="bi bi-people-fill"></i>
+                            EMPLOYEES
+                        </span>
                     </a>
                 </div>
             </div>

@@ -1,11 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Syne);
+
 .pink {
     background-color: #E8D3D3;
 }
 
 .icon {
-    font-size: calc(3rem + 3vmin)!important;
+    font-size: calc(3rem + 3vmin) !important;
 }
 
 .fs-scale {
-    font-size: calc(1rem + 3vmin)!important;
+    font-size: calc(1rem + 3vmax) !important;
+}
+
+body {
+    font-family: "Syne", sans-serif
 }
