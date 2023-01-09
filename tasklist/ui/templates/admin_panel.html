@@ -99,7 +99,7 @@
     </section>
 
     {# Add User Modal #}
-    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserModal" aria-hidden="true">
+    <div class="modal modal-lg fade" id="addUser" tabindex="-1" aria-labelledby="addUserModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -126,7 +126,7 @@
     </div>
 
     {# Add Task Modal #}
-    <div class="modal fade" id="addTask" tabindex="-1" aria-labelledby="addTaskModal" aria-hidden="true">
+    <div class="modal modal-lg fade" id="addTask" tabindex="-1" aria-labelledby="addTaskModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -154,7 +154,7 @@
 
     {# User Modals #}
     {% for user in all_users %}
-        <div class="modal fade" id="user-{{ user.id }}-modal" tabindex="-1" aria-labelledby="user-{{ user.id }}-modal"
+        <div class="modal modal-lg fade" id="user-{{ user.id }}-modal" tabindex="-1" aria-labelledby="user-{{ user.id }}-modal"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -183,12 +183,12 @@
                                 <div class="tab-pane fade show active" id="user-{{ user.id }}-ct" role="tabpanel"
                                      tabindex="0">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                             <tbody>
-                                            {% for row in all_links %}
-                                                {% if row.user_id == user.id and row.complete == True %}
+                                            {% for link in user.tasks %}
+                                                {% if link.complete == True %}
                                                     <tr>
-                                                        <td>{{  }}</td>
+                                                        <td>{{ link.task.name }}</td>
                                                     </tr>
                                                 {% endif %}
                                             {% endfor %}
@@ -198,12 +198,12 @@
                                 </div>
                                 <div class="tab-pane fade" id="user-{{ user.id }}-it" role="tabpanel" tabindex="0">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                             <tbody>
-                                            {% for row in all_links %}
-                                                {% if row.user_id == user.id and row.complete == False %}
+                                            {% for link in user.tasks %}
+                                                {% if link.complete == False %}
                                                     <tr>
-                                                        <td>{{ row.task_id.name }}</td>
+                                                        <td>{{ link.task.name }}</td>
                                                     </tr>
                                                 {% endif %}
                                             {% endfor %}
@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="user-{{ user.id }}-all" role="tabpanel" tabindex="0">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                             <tbody>
                                             {% for task in all_tasks %}
                                                 <tr>

@@ -9,7 +9,7 @@ class User(db.Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    tasks = relationship("Task", secondary="link", back_populates="users")
+    tasks = relationship("Link", back_populates="user")
 
     def __init__(self, name):
         self.name = name
@@ -20,7 +20,7 @@ class Task(db.Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    users = relationship("User", secondary="link", back_populates="tasks")
+    users = relationship("Link", back_populates="task")
 
     def __init__(self, name):
         self.name = name
@@ -28,17 +28,11 @@ class Task(db.Model):
 
 class Link(db.Model):
     __tablename__ = "link"
-    user_id = Column(
-        Integer,
-        ForeignKey("user.id"),
-        primary_key=True
-    )
+    user_id = Column(Integer, ForeignKey("user.id"), primary_key=True)
+    task_id = Column(Integer, ForeignKey('task.id'), primary_key=True)
 
-    task_id = Column(
-        Integer,
-        ForeignKey('task.id'),
-        primary_key=True
-    )
+    user = relationship("User", back_populates="tasks")
+    task = relationship("Task", back_populates="users")
 
     complete = Column(Boolean)
 
