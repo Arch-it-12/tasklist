@@ -81,7 +81,10 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <i class="bi bi-pencil-square"></i>
+                                             <a class="text-decoration-none text-reset" data-bs-toggle="modal"
+                                               data-bs-target="#task-{{ task.id }}-modal">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -226,6 +229,72 @@
                                                         </a>
                                                     </td>
                                                 </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {# Task Modals #}
+    {% for user in all_users %}
+        <div class="modal modal-lg fade" id="user-{{ user.id }}-modal" tabindex="-1" aria-labelledby="user-{{ user.id }}-modal"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">{{ user.name }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <nav>
+                                <div class="nav nav-tabs" role="tablist">
+                                    <button class="nav-link active" aria-current="page"
+                                            data-bs-toggle="tab" data-bs-target="#task-{{ task.id }}-as" role="tab"
+                                            type="button">Assigned Users
+                                    </button>
+                                    <button class="nav-link" data-bs-toggle="tab"
+                                            data-bs-target="#task-{{ task.id }}-all" role="tab" type="button">
+                                        All Users
+                                    </button>
+                                </div>
+                            </nav>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="task-{{ task.id }}-all" role="tabpanel"
+                                     tabindex="0">
+                                    <div class="table-responsive">
+                                        <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
+                                            <tbody>
+                                            {% for user in all_users %}
+                                                    <tr>
+                                                        <td>{{ user.name }}</td>
+                                                    </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="task-{{ task.id }}-as" role="tabpanel" tabindex="0">
+                                    <div class="table-responsive">
+                                        <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
+                                            <tbody>
+                                            {% for link in user.tasks %}
+                                                {% if link.complete == False %}
+                                                    <tr>
+                                                        <td>{{ link.task.name }}</td>
+                                                    </tr>
+                                                {% endif %}
                                             {% endfor %}
                                             </tbody>
                                         </table>
