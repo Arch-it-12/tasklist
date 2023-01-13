@@ -43,4 +43,5 @@ def user_list():
 
 
 def tasks(user):
-    return render_template("tasks.html", user=user)
+    da_user = db.session.query(User).filter_by(name=user).first()
+    return render_template("tasks.html", user=da_user)

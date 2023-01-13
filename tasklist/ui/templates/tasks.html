@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Task List
+    {{ user.name }}'s Tasks
 {% endblock title %}
 
 
@@ -30,14 +30,39 @@
 
     <section>
         <div class="container-fluid">
-            <div class="container fs-3 text-light text-center my-2">{{ user }}'s Tasks</div>
+            <div class="container fs-3 text-light text-center my-2">{{ user.name }}'s Incomplete Tasks</div>
             <div class="container p-0 my-3">
                 <div class="table-responsive">
                     <table class="table table-light table-hover border border-danger-subtle border-2 text-center">
-                        <td>Archit Ashok (Employee)</td>
+                        <tbody>
+                        {% for link in user.tasks %}
+                            {% if link.complete == False %}
+                                <tr>
+                                    <td>{{ link.task.name }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container fs-3 text-light text-center my-2">{{ user.name }}'s Complete Tasks</div>
+            <div class="container p-0 my-3">
+                <div class="table-responsive">
+                    <table class="table table-light table-hover border border-danger-subtle border-2 text-center">
+                        <tbody>
+                        {% for link in user.tasks %}
+                            {% if link.complete == True %}
+                                <tr>
+                                    <td>{{ link.task.name }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
     </section>
 {% endblock content %}
