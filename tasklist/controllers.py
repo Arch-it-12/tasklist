@@ -38,7 +38,8 @@ def admin_panel():
 
 
 def user_list():
-    return render_template("user_list.html")
+    all_users = db.session.query(User).all()
+    return render_template("user_list.html", all_users = all_users)
 
 
 def tasks(user):

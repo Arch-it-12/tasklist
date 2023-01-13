@@ -247,13 +247,13 @@
     {% endfor %}
 
     {# Task Modals #}
-    {% for user in all_users %}
-        <div class="modal modal-lg fade" id="user-{{ user.id }}-modal" tabindex="-1" aria-labelledby="user-{{ user.id }}-modal"
+    {% for task in all_tasks %}
+        <div class="modal modal-lg fade" id="task-{{ task.id }}-modal" tabindex="-1" aria-labelledby="task-{{ task.id }}-modal"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5">{{ user.name }}</h1>
+                        <h1 class="modal-title fs-5">{{ task.name }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -271,7 +271,7 @@
                                 </div>
                             </nav>
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="task-{{ task.id }}-all" role="tabpanel"
+                                <div class="tab-pane fade" id="task-{{ task.id }}-all" role="tabpanel"
                                      tabindex="0">
                                     <div class="table-responsive">
                                         <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
@@ -285,16 +285,14 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="task-{{ task.id }}-as" role="tabpanel" tabindex="0">
+                                <div class="tab-pane fade show active" id="task-{{ task.id }}-as" role="tabpanel" tabindex="0">
                                     <div class="table-responsive">
                                         <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                             <tbody>
-                                            {% for link in user.tasks %}
-                                                {% if link.complete == False %}
+                                            {% for link in task.users %}
                                                     <tr>
-                                                        <td>{{ link.task.name }}</td>
+                                                        <td>{{ link.user.name }}</td>
                                                     </tr>
-                                                {% endif %}
                                             {% endfor %}
                                             </tbody>
                                         </table>
