@@ -38,8 +38,12 @@
                         {% for user in all_users %}
                             <tr>
                                 <td>
-                                    <a href="{{ url_for("main.tasks", user=user.name) }}">
-                                        {{ user.name }}
+                                    {{ user.name }}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for("main.tasks", user_id=user.id) }}"
+                                       class="text-decoration-none text-reset">
+                                        <i class="bi bi-box-arrow-up-right"></i>
                                     </a>
                                 </td>
                             </tr>

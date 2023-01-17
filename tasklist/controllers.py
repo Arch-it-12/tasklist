@@ -39,9 +39,9 @@ def admin_panel():
 
 def user_list():
     all_users = db.session.query(User).all()
-    return render_template("user_list.html", all_users = all_users)
+    return render_template("user_list.html", all_users=all_users)
 
 
-def tasks(user):
-    da_user = db.session.query(User).filter_by(name=user).first()
-    return render_template("tasks.html", user=da_user)
+def tasks(user_id):
+    da_user = db.session.query(User).filter_by(id=user_id).first()
+    return render_template("tasks.html", user=da_user, user_id=user_id)

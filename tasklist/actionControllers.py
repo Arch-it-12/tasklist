@@ -38,3 +38,19 @@ def assign_task(user_id, task_id):
         return redirect(url_for("main.admin"))
 
     return redirect(url_for("main.admin"))
+
+
+def mark_task(user_id, task_id):
+    link = db.session.query(Link).filter_by(user_id=user_id, task_id=task_id).first()
+    link.complete = not link.complete
+    db.session.commit()
+
+    return redirect(url_for("main.tasks", user_id=user_id))
+
+
+def unassign_task(user_id, task_id):
+    link = db.session.query(Link).filter_by(user_id=user_id, task_id=task_id).first()
+    db.session.delete(link)
+    db.session.commit()
+
+    return redirect(url_for("main.admin"))

@@ -39,6 +39,12 @@
                             {% if link.complete == False %}
                                 <tr>
                                     <td>{{ link.task.name }}</td>
+                                    <td>
+                                        <a href="{{ url_for("action.mark_task", task_id=link.task.id, user_id=link.user.id) }}"
+                                           class="text-reset text-decoration-none">
+                                            <i class="bi bi-check"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
@@ -55,6 +61,12 @@
                             {% if link.complete == True %}
                                 <tr>
                                     <td>{{ link.task.name }}</td>
+                                    <td>
+                                        <a href="{{ url_for("action.mark_task", task_id=link.task.id, user_id=link.user.id) }}"
+                                           class="text-reset text-decoration-none">
+                                            <i class="bi bi-x"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endif %}
                         {% endfor %}

@@ -34,7 +34,7 @@ class Link(db.Model):
     user = relationship("User", back_populates="tasks")
     task = relationship("Task", back_populates="users")
 
-    complete = Column(Boolean)
+    complete = Column(Boolean, default=False)
 
     def __init__(self, user_id, task_id, complete=False):
         self.user_id = user_id
