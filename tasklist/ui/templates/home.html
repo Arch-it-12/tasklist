@@ -17,6 +17,8 @@
     <link rel="icon" type="image/x-icon" href="../static/icecream.webp">
 {% endblock head %}
 {% block content %}
+
+
     <section class="pink">
         <div class="container-fluid d-flex justify-content-between">
             <a href="{{ url_for("main.home") }}">
@@ -30,11 +32,11 @@
     </section>
 
     <section>
-        <div class="container-fluid d-flex mt-2">
+        <div class="container-fluid d-flex mt-2 mb-2" style="min-height: calc(92vh - 3rem);" >
             <div class="row flex-grow-1">
                 <div class="col-lg flex-grow-1 ps-lg-4 pe-lg-3">
-                    <a href="{{ url_for("main.admin") }}"
-                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light">
+                    <a data-bs-toggle="modal" data-bs-target="#passwordModal"
+                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light" style="height: calc(92vh - 3rem);">
                         <span class="d-inline fs-2">
                             <i class="bi bi-person-fill-gear"></i>
                             ADMIN
@@ -43,7 +45,7 @@
                 </div>
                 <div class="col-lg flex-grow-1 ps-lg-3 pe-lg-4">
                     <a href="{{ url_for("main.users") }}"
-                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light">
+                       class="btn pink flex-fill d-flex flex-column align-items-center justify-content-center my-2 text-light" style="height: calc(92vh - 3rem);">
                         <span class="d-inline fs-2">
                             <i class="bi bi-people-fill"></i>
                             EMPLOYEES
@@ -53,4 +55,32 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fs-5"  id="exampleModalLabel">Admin Password</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form method="POST">
+              <div class="modal-body">
+                  <div class="modal-body">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            <div class="form-group">
+                                {{ form.password.label(class="form-label") }}
+                                {{ form.password(class="form-control", type="password") }}
+                            </div>
+                        </div>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <input type="submit" class="btn btn-primary"value="Enter"></input>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="../static/js/script.js"></script>
 {% endblock content %}

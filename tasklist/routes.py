@@ -6,7 +6,7 @@ mainBP = Blueprint("main", __name__)
 actionBP = Blueprint("action", __name__, url_prefix="/action")
 
 mainBP.add_url_rule("/", "index", controllers.index)
-mainBP.add_url_rule("/home", "home", controllers.home)
+mainBP.add_url_rule("/home", "home", controllers.home, methods=["GET", "POST"])
 mainBP.add_url_rule("/admin", "admin", controllers.admin_panel, methods=["GET", "POST"])
 mainBP.add_url_rule("/users", "users", controllers.user_list)
 mainBP.add_url_rule("/tasks/<user_id>", "tasks", controllers.tasks)

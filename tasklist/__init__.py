@@ -2,6 +2,7 @@ from flask import Flask
 
 from .routes import mainBP, actionBP
 from .extensions import db, csrf
+import secrets
 
 
 def create_app():
@@ -11,6 +12,7 @@ def create_app():
     db.init_app(app)
     csrf.init_app(app)
     app.config["SESSION_SQLALCHEMY"] = db
+    app.config['SECRET_KEY'] = secrets.token_hex(16)
 
     app.register_blueprint(mainBP)
     app.register_blueprint(actionBP)

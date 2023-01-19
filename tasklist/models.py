@@ -3,6 +3,12 @@ from sqlalchemy.orm import relationship
 
 from .extensions import db
 
+from flask_login import UserMixin
+
+class Admin(db.Model, UserMixin):
+    __tablename__ = 'Admin'
+    admin = Column(String, unique=True, primary_key=True)
+    password = Column(String)
 
 class User(db.Model):
     __tablename__ = "user"
