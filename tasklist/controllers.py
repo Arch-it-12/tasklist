@@ -20,6 +20,7 @@ def home():
         # Verify password.
         if check_password_hash(generate_password_hash(password), "password123"):
             # Success.
+            flash("Login successful!", category="success")
             return redirect(url_for('main.admin'))
         else:
             # Something (user or pass) is not ok
