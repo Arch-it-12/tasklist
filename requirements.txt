@@ -13,3 +13,7 @@ pyparsing==3.0.9
 python-dotenv==0.21.0
 ranger-fm==1.9.3
 Werkzeug==2.2.2
+flask-WTF==1.1.1
+SQLAlchemy==1.4.46
+flask-sqlalchemy==3.0.2
+flask-Login==0.6.2
