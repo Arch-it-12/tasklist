@@ -7,8 +7,10 @@ from flask_login import login_user
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
+
 def index():
     return redirect(url_for("main.home"))
+
 
 def home():
     login_form = LoginForm(request.form)
@@ -26,6 +28,7 @@ def home():
             # Something (user or pass) is not ok
             flash("Incorrect password, try again.", category="danger")
     return render_template('home.html', msg='Wrong password.', form=login_form)
+
 
 def admin_panel():
     user_form = AddUser()

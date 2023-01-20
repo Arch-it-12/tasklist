@@ -20,11 +20,14 @@
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        function hide(){
+        function hide() {
             const el = document.getElementById("flash_close");
             el.click();
         }
-        setTimeout(function() { hide(); }, 1000);
+
+        setTimeout(function () {
+            hide();
+        }, 1000);
     </script>
 
     {% block head %}{% endblock head %}
@@ -37,7 +40,8 @@
             {% for category, message in messages %}
                 <div class="alert alert-{{ category }} alert-dismissible fade show m-1 mt-3 mb-3" role="alert">
                     {{ message }}
-                    <button type="button" class="btn-close red" id="flash_close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close red" id="flash_close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
                 </div>
             {% endfor %}
         {% endwith %}
