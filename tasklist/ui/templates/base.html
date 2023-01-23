@@ -19,6 +19,7 @@
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <script>
         function hide() {
             const el = document.getElementById("flash_close");
@@ -28,6 +29,23 @@
         setTimeout(function () {
             hide();
         }, 1000);
+
+        var row;
+
+        function start() {
+            row = event.target;
+        }
+
+        function dragover() {
+            var e = event;
+            e.preventDefault();
+
+            let children = Array.from(e.target.parentNode.parentNode.children);
+            if (children.indexOf(e.target.parentNode) > children.indexOf(row))
+                e.target.parentNode.after(row);
+            else
+                e.target.parentNode.before(row);
+        }
     </script>
 
     {% block head %}{% endblock head %}
@@ -37,13 +55,13 @@
 <section>
     <div class="container-fluid flew-grow-1" style="position: absolute;">
         {% with messages = get_flashed_messages(with_categories=true) %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }} alert-dismissible fade show m-1 mt-3 mb-3" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close red" id="flash_close" data-bs-dismiss="alert"
-                            aria-label="Close"></button>
-                </div>
-            {% endfor %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show m-1 mt-3 mb-3" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close red" id="flash_close" data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+        {% endfor %}
         {% endwith %}
     </div>
 </section>

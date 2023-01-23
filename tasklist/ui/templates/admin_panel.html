@@ -34,12 +34,17 @@
             <div class="row flex-grow-1 justify-content-center">
                 <div class="col-lg flex-grow-1">
                     <div class="container fs-3 text-light text-center my-2">Workers</div>
+                    <div class="container fs-2 text-light">
+                        <a class="text-decoration-none text-reset" data-bs-toggle="modal" data-bs-target="#addUser">
+                            <i class="bi bi-plus"></i>
+                        </a>
+                    </div>
                     <div class="container p-0">
                         <div class="table-responsive rounded-3 border border-top-0 border-bottom-0 border-danger-subtle border-2">
                             <table class="table table-light table-hover border-top border-bottom border-danger-subtle border-2 text-center my-0">
                                 <tbody>
                                 {% for user in all_users %}
-                                    <tr id="{{ user.id }}">
+                                    <tr id="{{ user.id }}" draggable='true' ondragstart='start()' ondragover='dragover()'>
                                         <td>{{ user.name }}</td>
                                         <td>
                                             <a href="{{ url_for("action.remove_user", user_id=user.id) }}"
@@ -59,20 +64,20 @@
                             </table>
                         </div>
                     </div>
-                    <div class="container fs-2 text-light mb-2">
-                        <a class="text-decoration-none text-reset" data-bs-toggle="modal" data-bs-target="#addUser">
-                            <i class="bi bi-plus"></i>
-                        </a>
-                    </div>
                 </div>
                 <div class="col-lg flex-grow-1">
                     <div class="container fs-3 text-light text-center my-2">Tasks</div>
+                    <div class="container fs-2 text-light">
+                        <a class="text-decoration-none text-reset" data-bs-toggle="modal" data-bs-target="#addTask">
+                            <i class="bi bi-plus"></i>
+                        </a>
+                    </div>
                     <div class="container p-0">
                         <div class="table-responsive rounded-3 border border-top-0 border-bottom-0 border-danger-subtle border-2">
                             <table class="table table-light table-hover border-top border-bottom border-danger-subtle border-2 text-center my-0">
                                 <tbody>
                                 {% for task in all_tasks %}
-                                    <tr id="{{ task.id }}">
+                                    <tr id="{{ task.id }}" draggable='true' ondragstart='start()' ondragover='dragover()'>
                                         <td>{{ task.name }}</td>
                                         <td>
                                             <a href="{{ url_for("action.remove_task", task_id=task.id) }}"
@@ -91,11 +96,6 @@
                                 {% endfor %}
                             </table>
                         </div>
-                    </div>
-                    <div class="container fs-2 text-light mb-2">
-                        <a class="text-decoration-none text-reset" data-bs-toggle="modal" data-bs-target="#addTask">
-                            <i class="bi bi-plus"></i>
-                        </a>
                     </div>
                 </div>
             </div>
