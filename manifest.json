@@ -1,0 +1,16 @@
+{
+  "name": "Employee Tasklist",
+  "short_name": "Tasklist",
+  "start_url": "home.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ac8bc9",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/static/icecream.webp",
+      "type": "image/x-icon",
+      "sizes": "348x484"
+    }
+  ]
+}
