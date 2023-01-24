@@ -1,5 +1,5 @@
 {
-  "name": "Employee Tasklist",
+  "name": "Jake's Ice Cream Employee Tasklist",
   "short_name": "Tasklist",
   "id": "/",
   "start_url": "/templates/home.html",
@@ -9,7 +9,7 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/ui/static/icecream.webp",
+      "src": "/icecream.webp",
       "type": "image/x-icon",
       "sizes": "348x484"
     }
