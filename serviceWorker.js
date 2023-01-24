@@ -1,4 +1,4 @@
-const staticDevCoffee = "dev-coffee-site-v1"
+const staticTasklist = "jakes-ice-cream-tasklist-v1"
 const assets = [
     "/",
     "/tasklist/ui/templates/",
@@ -14,7 +14,7 @@ const assets = [
 
 self.addEventListener("install", installEvent => {
     installEvent.waitUntil(
-        caches.open(staticDevCoffee).then(cache => {
+        caches.open(staticTasklist).then(cache => {
             cache.addAll(assets)
         })
     )
