@@ -2,7 +2,7 @@
   "name": "Jake's Ice Cream Employee Tasklist",
   "short_name": "Tasklist",
   "id": "/",
-  "start_url": "../templates/home.html",
+  "start_url": "/home",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ac8bc9",
