@@ -2,7 +2,7 @@
   "name": "Employee Tasklist",
   "short_name": "Tasklist",
   "id": "/",
-  "start_url": "/ui/templates/home.html",
+  "start_url": "/templates/home.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ac8bc9",

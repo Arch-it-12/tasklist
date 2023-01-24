@@ -1,15 +1,15 @@
 const staticTasklist = "jakes-ice-cream-tasklist-v1"
 const assets = [
     "/",
-    "/tasklist/ui/templates/",
-    "/tasklist/ui/static/style.css",
-    "/tasklist/ui/static/js/script.js",
-    "/tasklist/ui/static/icecream.webp",
-    "/tasklist/ui/templates/admin_panel.html",
-    "/tasklist/ui/templates/base.html",
-    "/tasklist/ui/templates/home.html",
-    "/tasklist/ui/templates/tasks.html",
-    "/tasklist/ui/templates/user_list.html"
+    "/templates/",
+    "/style.css",
+    "/js/script.js",
+    "/icecream.webp",
+    "/templates/admin_panel.html",
+    "/templates/base.html",
+    "/templates/home.html",
+    "/templates/tasks.html",
+    "/templates/user_list.html"
 ]
 
 self.addEventListener("install", installEvent => {
