@@ -6,5 +6,5 @@ class Config(object):
 
     # flask-SQLAlchemy
     SQLALCHEMY_DATABASE_URI = "sqlite:///tasklist.db"
-    SQLALCHEMY_ECHO = True
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
