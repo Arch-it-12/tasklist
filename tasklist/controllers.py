@@ -39,15 +39,13 @@ def admin_panel():
         db.session.add(user)
 
     if task_form.validate_on_submit():
-        print(task_form.task.data)
         task = Task(task_form.task.data)
         db.session.add(task)
 
     db.session.commit()
 
-    all_users = db.session.query(User).all()
-    all_tasks = db.session.query(Task).all()
-    print(all_tasks)
+    all_users = db.session.query(User).order_by(User.order).all()
+    all_tasks = db.session.query(Task).order_by(Task.order).all()
     all_links = db.session.query(Link).all()
 
     return render_template("admin_panel.html", userForm=user_form, taskForm=task_form, all_users=all_users,
