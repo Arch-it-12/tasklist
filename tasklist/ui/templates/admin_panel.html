@@ -28,6 +28,84 @@
             </div>
         </section>
 
+    <section>
+        <div class="container-fluid d-flex justify-content-center">
+            <div class="row flex-grow-1 justify-content-center">
+                <div class="col-lg flex-grow-1">
+                    <div class="container fs-3 text-light text-center my-2">Workers</div>
+                    <div class="container fs-2 text-light">
+                        <a class="text-decoration-none text-reset" data-bs-toggle="modal" data-bs-target="#addUser">
+                            <i class="bi bi-plus"></i>
+                        </a>
+                    </div>
+                    <div class="container p-0">
+                        <div class="table-responsive rounded-3 border border-top-0 border-bottom-0 border-danger-subtle border-2">
+                            <table class="table table-light table-hover border-top border-bottom border-danger-subtle border-2 text-center my-0"
+                                   id="user-table">
+                                <tbody>
+                                {% for user in all_users %}
+                                    <tr id="{{ user.id }}" draggable='true' ondragstart='start()'
+                                        ondragover='dragover()' ondragend="endDrag('user-table')">
+                                        <td hidden="hidden">{{ user.id }}</td>
+                                        <td>{{ user.name }}</td>
+                                        <td>
+                                            <a href="{{ url_for("action.remove_user", user_id=user.id) }}"
+                                               class="text-decoration-none text-reset">
+                                                <i class="bi bi-dash"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="text-decoration-none text-reset" data-bs-toggle="modal"
+                                               data-bs-target="#user-{{ user.id }}-modal">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg flex-grow-1">
+                    <div class="container fs-3 text-light text-center my-2">Tasks</div>
+                    <div class="container fs-2 text-light">
+                        <a class="text-decoration-none text-reset" data-bs-toggle="modal" data-bs-target="#addTask">
+                            <i class="bi bi-plus"></i>
+                        </a>
+                    </div>
+                    <div class="container p-0">
+                        <div class="table-responsive rounded-3 border border-top-0 border-bottom-0 border-danger-subtle border-2">
+                            <table class="table table-light table-hover border-top border-bottom border-danger-subtle border-2 text-center my-0"
+                                   id="task-table">
+                                <tbody>
+                                {% for task in all_tasks %}
+                                    <tr id="{{ task.id }}" draggable='true' ondragstart='start()'
+                                        ondragover='dragover()' ondragend="endDrag('task-table')">
+                                        <td hidden="hidden">{{ task.id }}</td>
+                                        <td>{{ task.name }}</td>
+                                        <td>
+                                            <a href="{{ url_for("action.remove_task", task_id=task.id) }}"
+                                               class="text-decoration-none text-reset">
+                                                <i class="bi bi-dash"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="text-decoration-none text-reset" data-bs-toggle="modal"
+                                               data-bs-target="#task-{{ task.id }}-modal">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
         <section>
             <div class="container-fluid d-flex justify-content-center">
                 <div class="row flex-grow-1 justify-content-center">
