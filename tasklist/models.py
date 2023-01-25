@@ -17,10 +17,12 @@ class User(db.Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    order = Column(Integer)
     tasks = relationship("Link", back_populates="user")
 
     def __init__(self, name):
         self.name = name
+        self.order = len(db.session.query(User).all()) + 1
 
 
 class Task(db.Model):
@@ -28,10 +30,12 @@ class Task(db.Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    order = Column(Integer)
     users = relationship("Link", back_populates="task")
 
     def __init__(self, name):
         self.name = name
+        self.order = len(db.session.query(Task).all()) + 1
 
 
 class Link(db.Model):
