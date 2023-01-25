@@ -1,5 +1,7 @@
+import json
+
 import sqlalchemy.exc
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 
 from .forms import AddUser, AddTask
 from .models import User, Task, Link
@@ -51,6 +53,28 @@ def mark_task(user_id, task_id):
 def unassign_task(user_id, task_id):
     link = db.session.query(Link).filter_by(user_id=user_id, task_id=task_id).first()
     db.session.delete(link)
+    db.session.commit()
+
+    return redirect(url_for("main.admin"))
+
+
+def reorder():
+    ids = json.loads(request.json['id_list'])
+    ids = [int(i) for i in ids]
+    ids = dict(zip(ids, range(1, len(ids) + 1)))
+
+    group = json.loads(request.json['group'])
+
+    if group == "user-table":
+        all_users = db.session.query(User).order_by(User.id).all()
+        for user in all_users:
+            print(ids.get(user.id))
+            user.order = ids.get(user.id)
+    else:
+        all_tasks = db.session.query(Task).order_by(Task.id).all()
+        for task in all_tasks:
+            task.order = ids.get(task.id)
+
     db.session.commit()
 
     return redirect(url_for("main.admin"))
