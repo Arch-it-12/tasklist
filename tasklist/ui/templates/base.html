@@ -64,6 +64,27 @@
                 e.target.parentNode.before(row);
         }
 
+        function endDrag(table_id) {
+            let csrf = "{{ csrf_token() }}";
+            let rows = document.getElementById(table_id).rows;
+            let id = [];
+
+            for (let i = 0; i < rows.length; i++) {
+                id.push(rows[i].cells[0].innerHTML);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/action/reorder",
+                headers: {
+                    "X-CSRFToken": csrf,
+                },
+                data: JSON.stringify({"id_list": JSON.stringify(id), "group" : JSON.stringify(table_id)}),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+            });
+        }
+
         if ("serviceWorker" in navigator) {
             window.addEventListener("load", function () {
                 navigator.serviceWorker
@@ -81,13 +102,13 @@
 <section>
     <div class="container-fluid flew-grow-1" style="position: absolute;">
         {% with messages = get_flashed_messages(with_categories=true) %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismissible fade show m-1 mt-3 mb-3" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close red" id="flash_close" data-bs-dismiss="alert"
-                    aria-label="Close"></button>
-        </div>
-        {% endfor %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show m-1 mt-3 mb-3" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close red" id="flash_close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            {% endfor %}
         {% endwith %}
     </div>
 </section>
