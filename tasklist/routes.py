@@ -16,3 +16,4 @@ actionBP.add_url_rule("/remove_task/<task_id>", "remove_task", actionControllers
 actionBP.add_url_rule("/assign_task/<user_id>/<task_id>", "assign_task", actionControllers.assign_task)
 actionBP.add_url_rule("/mark_task/<user_id>/<task_id>", "mark_task", actionControllers.mark_task)
 actionBP.add_url_rule("/unassign_task/<user_id>/<task_id>", "unassign_task", actionControllers.unassign_task)
+actionBP.add_url_rule("/reorder", "reorder", actionControllers.reorder, methods=["GET", "POST"])
