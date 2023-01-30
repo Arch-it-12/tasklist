@@ -53,7 +53,7 @@ def admin_panel():
 
 
 def user_list():
-    all_users = db.session.query(User).all()
+    all_users = db.session.query(User).order_by(User.order).all()
     return render_template("user_list.html", all_users=all_users)
 
 
