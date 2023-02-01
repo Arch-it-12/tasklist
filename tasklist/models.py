@@ -7,9 +7,15 @@ from flask_login import UserMixin
 
 
 class Admin(db.Model, UserMixin):
-    __tablename__ = 'Admin'
-    admin = Column(String, unique=True, primary_key=True)
+    __tablename__ = 'admin'
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True)
     password = Column(String)
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
 
 
 class User(db.Model):

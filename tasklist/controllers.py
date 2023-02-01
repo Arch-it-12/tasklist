@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, flash, request
 from .forms import AddUser, AddTask, LoginForm
 from .models import User, Task, Link, Admin
 from .extensions import db
-from flask_login import login_user
+from flask_login import login_user, login_required, LoginManager
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -16,20 +16,19 @@ def home():
     login_form = LoginForm(request.form)
 
     if request.method == 'POST' and login_form.validate_on_submit():
-        # read form data
         password = request.form.get('password')
-        # project's password given its name.
-        # Verify password.
-        if check_password_hash(generate_password_hash(password), "password123"):
-            # Success.
+        admin = Admin.query.filter_by(username="admin").first()
+
+        if admin and check_password_hash(admin.password, password):
+            login_user(admin)
             flash("Login successful!", category="success")
             return redirect(url_for('main.admin'))
         else:
-            # Something (user or pass) is not ok
             flash("Incorrect password, try again.", category="danger")
     return render_template('home.html', msg='Wrong password.', form=login_form)
 
 
+@login_required
 def admin_panel():
     user_form = AddUser()
     task_form = AddTask()
