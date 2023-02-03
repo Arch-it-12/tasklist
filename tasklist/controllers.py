@@ -30,6 +30,9 @@ def home():
 
 @login_required
 def admin_panel():
+    group = request.args.get("group")
+    tab = request.args.get("tab")
+
     user_form = AddUser()
     task_form = AddTask()
 
@@ -48,7 +51,7 @@ def admin_panel():
     all_links = db.session.query(Link).all()
 
     return render_template("admin_panel.html", userForm=user_form, taskForm=task_form, all_users=all_users,
-                           all_tasks=all_tasks, all_links=all_links)
+                           all_tasks=all_tasks, all_links=all_links, group=group, tab=tab)
 
 
 def user_list():

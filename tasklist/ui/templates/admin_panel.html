@@ -12,7 +12,6 @@
             background-size: 197.99px 197.99px;
         }
     </style>
-
 {% endblock head %}
 {% block content %}
     <main>
@@ -131,7 +130,7 @@
 
 
         {# Add User Modal #}
-        <div class="modal modal-lg fade" id="addUser" tabindex="-1" aria-labelledby="addUserModal" aria-hidden="true">
+        <div class="modal modal-lg" id="addUser" tabindex="-1" aria-labelledby="addUserModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -158,7 +157,7 @@
         </div>
 
         {# Add Task Modal #}
-        <div class="modal modal-lg fade" id="addTask" tabindex="-1" aria-labelledby="addTaskModal" aria-hidden="true">
+        <div class="modal modal-lg" id="addTask" tabindex="-1" aria-labelledby="addTaskModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -186,7 +185,7 @@
 
         {# User Modals #}
         {% for user in all_users %}
-            <div class="modal modal-lg fade" id="user-{{ user.id }}-modal" tabindex="-1"
+            <div class="modal modal-lg" id="user-{{ user.id }}-modal" tabindex="-1"
                  aria-labelledby="user-{{ user.id }}-modal"
                  aria-hidden="true">
                 <div class="modal-dialog">
@@ -215,7 +214,7 @@
                                     </div>
                                 </nav>
                                 <div class="tab-content">
-                                    <div class="tab-pane fade" id="user-{{ user.id }}-ct" role="tabpanel"
+                                    <div class="tab-pane" id="user-{{ user.id }}-ct" role="tabpanel"
                                          tabindex="0">
                                         <div class="table-responsive">
                                             <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
@@ -225,7 +224,7 @@
                                                         <tr>
                                                             <td>{{ link.task.name }}</td>
                                                             <td>
-                                                                <a href="{{ url_for("action.unassign_task", task_id=link.task.id, user_id=link.user.id) }}"
+                                                                <a href="{{ url_for("action.unassign_task", task_id=link.task.id, user_id=link.user.id, group="user-" ~ user.id ~ "-modal", tab="user-" ~ user.id ~ "-ct") }}"
                                                                    class="text-reset text-decoration-none">
                                                                     <i class="bi bi-dash"></i>
                                                                 </a>
@@ -237,7 +236,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="user-{{ user.id }}-it" role="tabpanel"
+                                    <div class="tab-pane" id="user-{{ user.id }}-it" role="tabpanel"
                                          tabindex="0">
                                         <div class="table-responsive">
                                             <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
@@ -247,7 +246,7 @@
                                                         <tr>
                                                             <td>{{ link.task.name }}</td>
                                                             <td>
-                                                                <a href="{{ url_for("action.unassign_task", task_id=link.task.id, user_id=link.user.id) }}"
+                                                                <a href="{{ url_for("action.unassign_task", task_id=link.task.id, user_id=link.user.id, group="user-" ~ user.id ~ "-modal", tab="user-" ~ user.id ~ "-it") }}"
                                                                    class="text-reset text-decoration-none">
                                                                     <i class="bi bi-dash"></i>
                                                                 </a>
@@ -259,8 +258,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade show active" id="user-{{ user.id }}-all" role="tabpanel"
-                                         tabindex="0">
+                                    <div class="tab-pane" id="user-{{ user.id }}-all" role="tabpanel" tabindex="0">
                                         <div class="table-responsive">
                                             <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                                 <tbody>
@@ -268,7 +266,7 @@
                                                     <tr>
                                                         <td>{{ task.name }}</td>
                                                         <td>
-                                                            <a href="{{ url_for("action.assign_task", user_id=user.id, task_id=task.id) }}"
+                                                            <a href="{{ url_for("action.assign_task", user_id=user.id, task_id=task.id, group="user-" ~ user.id ~ "-modal", tab="user-" ~ user.id ~ "-all") }}"
                                                                class="text-decoration-none text-reset">
                                                                 <i class="bi bi-plus"></i>
                                                             </a>
@@ -293,7 +291,7 @@
 
         {# Task Modals #}
         {% for task in all_tasks %}
-            <div class="modal modal-lg fade" id="task-{{ task.id }}-modal" tabindex="-1"
+            <div class="modal modal-lg" id="task-{{ task.id }}-modal" tabindex="-1"
                  aria-labelledby="task-{{ task.id }}-modal"
                  aria-hidden="true">
                 <div class="modal-dialog">
@@ -317,7 +315,7 @@
                                     </div>
                                 </nav>
                                 <div class="tab-content">
-                                    <div class="tab-pane fade" id="task-{{ task.id }}-all" role="tabpanel"
+                                    <div class="tab-pane" id="task-{{ task.id }}-all" role="tabpanel"
                                          tabindex="0">
                                         <div class="table-responsive">
                                             <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
@@ -337,7 +335,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade show active" id="task-{{ task.id }}-as" role="tabpanel"
+                                    <div class="tab-pane show active" id="task-{{ task.id }}-as" role="tabpanel"
                                          tabindex="0">
                                         <div class="table-responsive">
                                             <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
@@ -368,4 +366,16 @@
                 </div>
             </div>
         {% endfor %}
+
+        <script>
+
+            $("#{{ group }}").on('shown.bs.modal', function (e) {
+                let theTab = new bootstrap.Tab($('.nav-tabs > button[data-bs-target="#{{ tab }}"]'))
+                theTab.show()
+            })
+
+            let modal = new bootstrap.Modal($("#{{ group }}"));
+            modal.show()
+        </script>
+    </main>
 {% endblock content %}

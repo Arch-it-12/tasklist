@@ -43,15 +43,18 @@ def copy(user_id1, user_id2, user_name1, user_name2):
 
 
 def assign_task(user_id, task_id):
+    group = request.args.get("group")
+    tab = request.args.get("tab")
+
     link = Link(user_id, task_id)
     db.session.add(link)
 
     try:
         db.session.commit()
     except sqlalchemy.exc.IntegrityError:
-        return redirect(url_for("main.admin"))
+        return redirect(url_for("main.admin", group=group, tab=tab))
 
-    return redirect(url_for("main.admin"))
+    return redirect(url_for("main.admin", group=group, tab=tab))
 
 
 def mark_task(user_id, task_id):
@@ -63,11 +66,16 @@ def mark_task(user_id, task_id):
 
 
 def unassign_task(user_id, task_id):
+    group = request.args.get("group")
+    tab = request.args.get("tab")
+
+    print(group, tab)
+
     link = db.session.query(Link).filter_by(user_id=user_id, task_id=task_id).first()
     db.session.delete(link)
     db.session.commit()
 
-    return redirect(url_for("main.admin"))
+    return redirect(url_for("main.admin", group=group, tab=tab))
 
 
 def reorder():
