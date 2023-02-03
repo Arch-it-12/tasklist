@@ -194,7 +194,10 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5">{{ user.name }}</h1>
-                                <button type="submit" class="btn btn-outline-secondary">Assign Tasks</button>
+                                <div>
+                                    <button type="submit" class="btn btn-outline-secondary">Assign Tasks</button>
+                                </div>
+
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
@@ -304,76 +307,81 @@
             <div class="modal modal-lg" id="task-{{ task.id }}-modal" tabindex="-1"
                  aria-labelledby="task-{{ task.id }}-modal"
                  aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5">{{ task.name }}</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <nav>
-                                    <div class="nav nav-tabs" role="tablist">
-                                        <button class="nav-link active" aria-current="page"
-                                                data-bs-toggle="tab" data-bs-target="#task-{{ task.id }}-as" role="tab"
-                                                type="button">Assigned Users
-                                        </button>
-                                        <button class="nav-link" data-bs-toggle="tab"
-                                                data-bs-target="#task-{{ task.id }}-all" role="tab" type="button">
-                                            All Users
-                                        </button>
-                                    </div>
-                                </nav>
-                                <div class="tab-content">
-                                    <div class="tab-pane" id="task-{{ task.id }}-all" role="tabpanel"
-                                         tabindex="0">
-                                        <div class="table-responsive">
-                                            <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
-                                                <tbody>
-                                                {% for user in all_users %}
-                                                    <tr>
-                                                        <td>{{ user.name }}</td>
-                                                        <td>
-                                                            <a href="{{ url_for("action.assign_task", task_id=task.id, user_id=user.id) }}"
-                                                               class="text-reset text-decoration-none">
-                                                                <i class="bi bi-plus"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
+                <form action="{{ url_for("action.assign_user", task_id=task.id) }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5">{{ task.name }}</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <nav>
+                                        <div class="nav nav-tabs" role="tablist">
+                                            <button class="nav-link active" aria-current="page"
+                                                    data-bs-toggle="tab" data-bs-target="#task-{{ task.id }}-as"
+                                                    role="tab"
+                                                    type="button">Assigned Users
+                                            </button>
+                                            <button class="nav-link" data-bs-toggle="tab"
+                                                    data-bs-target="#task-{{ task.id }}-all" role="tab" type="button">
+                                                All Users
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane show active" id="task-{{ task.id }}-as" role="tabpanel"
-                                         tabindex="0">
-                                        <div class="table-responsive">
-                                            <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
-                                                <tbody>
-                                                {% for link in task.users %}
-                                                    <tr>
-                                                        <td>{{ link.user.name }}</td>
-                                                        <td>
-                                                            <a href="{{ url_for("action.unassign_task", task_id=link.task.id, user_id=link.user.id) }}"
-                                                               class="text-reset text-decoration-none">
-                                                                <i class="bi bi-dash"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
+                                    </nav>
+                                    <div class="tab-content">
+                                        <div class="tab-pane" id="task-{{ task.id }}-all" role="tabpanel"
+                                             tabindex="0">
+                                            <div class="table-responsive">
+                                                <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
+                                                    <tbody>
+                                                    {% for user in all_users %}
+                                                        <tr>
+                                                            <td>{{ user.name }}</td>
+                                                            <td>
+                                                                <input type="checkbox" class="form-check-input"
+                                                                       name="{{ task.id }}-user-box"
+                                                                       value="{{ user.id }}">
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane show active" id="task-{{ task.id }}-as" role="tabpanel"
+                                             tabindex="0">
+                                            <div class="table-responsive">
+                                                <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
+                                                    <tbody>
+                                                    {% for link in task.users %}
+                                                        <tr>
+                                                            <td>{{ link.user.name }}</td>
+                                                            <td>
+                                                                <a href="{{ url_for("action.unassign_task", task_id=link.task.id, user_id=link.user.id) }}"
+                                                                   class="text-reset text-decoration-none">
+                                                                    <i class="bi bi-dash"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                            </button>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-outline-secondary">Assign Users</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         {% endfor %}
 

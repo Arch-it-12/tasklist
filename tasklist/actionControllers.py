@@ -1,4 +1,5 @@
 import json
+import sqlite3
 
 import sqlalchemy.exc
 from flask import render_template, redirect, url_for, request, flash
@@ -55,6 +56,24 @@ def assign_task(user_id):
         try:
             db.session.commit()
         except sqlalchemy.exc.IntegrityError:
+            continue
+
+    return redirect(url_for("main.admin", group=group, tab=tab))
+
+
+def assign_user(task_id):
+    group = request.args.get("group")
+    tab = request.args.get("tab")
+
+    choices = request.form.getlist(task_id + "-user-box")
+
+    for y in choices:
+        link = Link(int(y), int(task_id))
+        db.session.add(link)
+
+        try:
+            db.session.commit()
+        except Exception:
             continue
 
     return redirect(url_for("main.admin", group=group, tab=tab))
