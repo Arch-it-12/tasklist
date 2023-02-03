@@ -39,7 +39,7 @@
                                     {{ user.name }}
                                 </td>
                                 <td>
-                                    <a href="{{ url_for("main.tasks", user_id=user.id) }}"
+                                    <a title="See Tasks" href="{{ url_for("main.tasks", user_id=user.id) }}"
                                        class="text-decoration-none text-reset">
                                         <i class="bi bi-box-arrow-up-right"></i>
                                     </a>

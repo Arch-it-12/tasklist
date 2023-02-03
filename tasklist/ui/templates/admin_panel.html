@@ -35,7 +35,8 @@
                         <div class="container fs-3 text-light text-center my-2 d-flex justify-content-between">
                             <i class="invisible bi bi-plus"></i>
                             <div>Workers</div>
-                            <a class="text-decoration-none text-reset" data-bs-toggle="modal" data-bs-target="#addUser">
+                            <a title="Add Worker" class="text-decoration-none text-reset" data-bs-toggle="modal"
+                               data-bs-target="#addUser">
                                 <i class="bi bi-plus"></i>
                             </a>
                         </div>
@@ -50,13 +51,29 @@
                                             <td hidden="hidden">{{ user.id }}</td>
                                             <td>{{ user.name }}</td>
                                             <td>
-                                                <a href="{{ url_for("action.remove_user", user_id=user.id) }}"
+                                                <a title="Copy Tasks"
+                                                   class="text-decoration-none text-reset" data-bs-toggle="dropdown"
+                                                   aria-expanded="false">
+                                                    <i class="bi bi-clipboard"></i>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    {% for user2 in all_users %}
+                                                        <li><a class="dropdown-item"
+                                                               href="{{ url_for("action.copy", user_id1=user.id, user_id2=user2.id, user_name1=user.name, user_name2=user2.name) }}">{{ user2.name }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <a title="Remove Worker"
+                                                   href="{{ url_for("action.remove_user", user_id=user.id) }}"
                                                    class="text-decoration-none text-reset">
                                                     <i class="bi bi-dash"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="text-decoration-none text-reset" data-bs-toggle="modal"
+                                                <a title="Edit Worker" class="text-decoration-none text-reset"
+                                                   data-bs-toggle="modal"
                                                    data-bs-target="#user-{{ user.id }}-modal">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
@@ -72,7 +89,8 @@
                         <div class="container fs-3 text-light text-center my-2 d-flex justify-content-between">
                             <i class="bi bi-plus invisible"></i>
                             <div>Tasks</div>
-                            <a class="text-decoration-none text-reset" data-bs-toggle="modal" data-bs-target="#addTask">
+                            <a title="Add Task" class="text-decoration-none text-reset" data-bs-toggle="modal"
+                               data-bs-target="#addTask">
                                 <i class="bi bi-plus"></i>
                             </a>
                         </div>
@@ -87,13 +105,15 @@
                                             <td hidden="hidden">{{ task.id }}</td>
                                             <td>{{ task.name }}</td>
                                             <td>
-                                                <a href="{{ url_for("action.remove_task", task_id=task.id) }}"
+                                                <a title="Remove Task"
+                                                   href="{{ url_for("action.remove_task", task_id=task.id) }}"
                                                    class="text-decoration-none text-reset">
                                                     <i class="bi bi-dash"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="text-decoration-none text-reset" data-bs-toggle="modal"
+                                                <a title="Edit Task" class="text-decoration-none text-reset"
+                                                   data-bs-toggle="modal"
                                                    data-bs-target="#task-{{ task.id }}-modal">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
@@ -179,7 +199,11 @@
                             <div class="mb-3">
                                 <nav>
                                     <div class="nav nav-tabs" role="tablist">
-                                        <button class="nav-link active" aria-current="page"
+                                        <button class="nav-link active" data-bs-toggle="tab" aria-current="page"
+                                                data-bs-target="#user-{{ user.id }}-all" role="tab" type="button">All
+                                            Tasks
+                                        </button>
+                                        <button class="nav-link"
                                                 data-bs-toggle="tab" data-bs-target="#user-{{ user.id }}-ct" role="tab"
                                                 type="button">Complete Tasks
                                         </button>
@@ -188,14 +212,10 @@
                                             Incomplete
                                             Tasks
                                         </button>
-                                        <button class="nav-link" data-bs-toggle="tab"
-                                                data-bs-target="#user-{{ user.id }}-all" role="tab" type="button">All
-                                            Tasks
-                                        </button>
                                     </div>
                                 </nav>
                                 <div class="tab-content">
-                                    <div class="tab-pane fade show active" id="user-{{ user.id }}-ct" role="tabpanel"
+                                    <div class="tab-pane fade" id="user-{{ user.id }}-ct" role="tabpanel"
                                          tabindex="0">
                                         <div class="table-responsive">
                                             <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
@@ -217,7 +237,8 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="user-{{ user.id }}-it" role="tabpanel" tabindex="0">
+                                    <div class="tab-pane fade" id="user-{{ user.id }}-it" role="tabpanel"
+                                         tabindex="0">
                                         <div class="table-responsive">
                                             <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                                 <tbody>
@@ -238,7 +259,8 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="user-{{ user.id }}-all" role="tabpanel" tabindex="0">
+                                    <div class="tab-pane fade show active" id="user-{{ user.id }}-all" role="tabpanel"
+                                         tabindex="0">
                                         <div class="table-responsive">
                                             <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                                 <tbody>

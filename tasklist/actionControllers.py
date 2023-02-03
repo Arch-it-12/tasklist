@@ -1,7 +1,7 @@
 import json
 
 import sqlalchemy.exc
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, flash
 
 from .forms import AddUser, AddTask
 from .models import User, Task, Link
@@ -26,6 +26,18 @@ def remove_task(task_id):
     for i in tasks:
         db.session.delete(i)
     db.session.commit()
+
+    return redirect(url_for("main.admin"))
+
+
+def copy(user_id1, user_id2, user_name1, user_name2):
+    fromuser = db.session.query(Link).filter_by(user_id=user_id2).all()
+    alllinks = db.session.query(Link)
+    for i in fromuser:
+        if i not in alllinks:
+            db.session.add(Link(user_id1, i.task_id))
+    db.session.commit()
+    flash("Copied " + user_name2 + "'s tasks to " + user_name1, category="success")
 
     return redirect(url_for("main.admin"))
 
