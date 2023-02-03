@@ -48,7 +48,7 @@ def admin_panel():
 
     all_users = db.session.query(User).order_by(User.order).all()
     all_tasks = db.session.query(Task).order_by(Task.order).all()
-    all_links = db.session.query(Link).all()
+    all_links = db.session.query(Link).order_by(Link.order).all()
 
     return render_template("admin_panel.html", userForm=user_form, taskForm=task_form, all_users=all_users,
                            all_tasks=all_tasks, all_links=all_links, group=group, tab=tab)
@@ -61,4 +61,5 @@ def user_list():
 
 def tasks(user_id):
     da_user = db.session.query(User).filter_by(id=user_id).first()
-    return render_template("tasks.html", user=da_user, user_id=user_id)
+    da_users_tasks = db.session.query(Link).filter_by(user_id=user_id).order_by(Link.order).all()
+    return render_template("tasks.html", user=da_user, user_id=user_id, tasks=da_users_tasks)

@@ -53,6 +53,7 @@ class Link(db.Model):
     task = relationship("Task", back_populates="users")
 
     complete = Column(Boolean, default=False)
+    order = Column(Integer)
 
     def __init__(self, user_id, task_id, complete=False):
         self.user_id = user_id

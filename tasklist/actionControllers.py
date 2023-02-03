@@ -90,10 +90,17 @@ def reorder():
         for user in all_users:
             print(ids.get(user.id))
             user.order = ids.get(user.id)
-    else:
+    elif group == "task-table":
         all_tasks = db.session.query(Task).order_by(Task.id).all()
         for task in all_tasks:
             task.order = ids.get(task.id)
+    else:
+        user_id = group.split("-")[0]
+        user_tasks = db.session.query(Link).filter_by(user_id=user_id).order_by(Link.task_id).all()
+        for task in user_tasks:
+            task.order = ids.get(task.task.id)
+        db.session.commit()
+        return redirect(url_for("main.tasks", user_id=user_id))
 
     db.session.commit()
 
