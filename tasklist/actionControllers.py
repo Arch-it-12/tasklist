@@ -42,17 +42,20 @@ def copy(user_id1, user_id2, user_name1, user_name2):
     return redirect(url_for("main.admin"))
 
 
-def assign_task(user_id, task_id):
+def assign_task(user_id):
     group = request.args.get("group")
     tab = request.args.get("tab")
 
-    link = Link(user_id, task_id)
-    db.session.add(link)
+    choices = request.form.getlist(user_id + "-task-box")
 
-    try:
-        db.session.commit()
-    except sqlalchemy.exc.IntegrityError:
-        return redirect(url_for("main.admin", group=group, tab=tab))
+    for y in choices:
+        link = Link(user_id, int(y))
+        db.session.add(link)
+
+        try:
+            db.session.commit()
+        except sqlalchemy.exc.IntegrityError:
+            continue
 
     return redirect(url_for("main.admin", group=group, tab=tab))
 

@@ -13,7 +13,7 @@ mainBP.add_url_rule("/tasks/<user_id>", "tasks", controllers.tasks)
 
 actionBP.add_url_rule("/remove_user/<user_id>", "remove_user", actionControllers.remove_user)
 actionBP.add_url_rule("/remove_task/<task_id>", "remove_task", actionControllers.remove_task)
-actionBP.add_url_rule("/assign_task/<user_id>/<task_id>", "assign_task", actionControllers.assign_task)
+actionBP.add_url_rule("/assign_task/<user_id>", "assign_task", actionControllers.assign_task, methods=["GET", "POST"])
 actionBP.add_url_rule("/mark_task/<user_id>/<task_id>", "mark_task", actionControllers.mark_task)
 actionBP.add_url_rule("/unassign_task/<user_id>/<task_id>", "unassign_task", actionControllers.unassign_task)
 actionBP.add_url_rule("/reorder", "reorder", actionControllers.reorder, methods=["GET", "POST"])
