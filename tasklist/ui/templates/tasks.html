@@ -29,7 +29,8 @@
 
     <section class="print-container">
         <div class="container print-container align-items-center text-center">
-            <a class="btn pink flex-column align-items-center justify-content-md-center mt-4 mb-2 mx-2 text-light" onclick="window.print()">
+            <a class="btn pink flex-column align-items-center justify-content-md-center mt-4 mb-2 mx-2 text-light"
+               onclick="window.print()">
                 <span class="d-inline fs-2">
                     <i class="bi bi-printer-fill"></i>
                     PRINT TASKS
@@ -43,14 +44,18 @@
             <div class="container fs-3 text-light text-center my-2">{{ user.name }}'s Incomplete Tasks</div>
             <div class="container p-0 my-3">
                 <div class="table-responsive">
-                    <table class="table table-light table-hover border border-danger-subtle border-2 text-center">
+                    <table id="{{ user.id }}-tasktable"
+                           class="table table-light table-hover border border-danger-subtle border-2 text-center">
                         <tbody>
-                        {% for link in user.tasks %}
+                        {% for link in tasks %}
                             {% if link.complete == False %}
-                                <tr>
+                                <tr draggable='true' ondragstart='start()'
+                                    ondragover='dragover()' ondragend="endDrag('{{ user.id }}-tasktable')">
+                                    <td hidden="hidden">{{ link.task.id }}</td>
                                     <td>{{ link.task.name }}</td>
                                     <td>
-                                        <a href="{{ url_for("action.mark_task", task_id=link.task.id, user_id=link.user.id) }}"
+                                        <a title="Complete Task"
+                                           href="{{ url_for("action.mark_task", task_id=link.task.id, user_id=link.user.id) }}"
                                            class="text-reset text-decoration-none">
                                             <i class="bi bi-check"></i>
                                         </a>
@@ -67,12 +72,13 @@
                 <div class="table-responsive">
                     <table class="table table-light table-hover border border-danger-subtle border-2 text-center">
                         <tbody>
-                        {% for link in user.tasks %}
+                        {% for link in tasks %}
                             {% if link.complete == True %}
                                 <tr>
                                     <td>{{ link.task.name }}</td>
                                     <td>
-                                        <a href="{{ url_for("action.mark_task", task_id=link.task.id, user_id=link.user.id) }}"
+                                        <a title="Drop Task"
+                                           href="{{ url_for("action.mark_task", task_id=link.task.id, user_id=link.user.id) }}"
                                            class="text-reset text-decoration-none">
                                             <i class="bi bi-x"></i>
                                         </a>
