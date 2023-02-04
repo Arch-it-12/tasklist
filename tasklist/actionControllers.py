@@ -118,7 +118,10 @@ def reorder():
             task.order = ids.get(task.id)
     else:
         user_id = group.split("-")[0]
-        user_tasks = db.session.query(Link).filter_by(user_id=user_id).order_by(Link.task_id).all()
+        user_tasks = db.session.query(Link).filter_by(user_id=user_id).filter_by(complete=True).order_by(
+            Link.task_id).all()
+        user_tasks = user_tasks + db.session.query(Link).filter_by(user_id=user_id).filter_by(complete=False).order_by(
+            Link.task_id).all()
         for task in user_tasks:
             task.order = ids.get(task.task.id)
         db.session.commit()

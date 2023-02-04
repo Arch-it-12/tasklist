@@ -224,11 +224,15 @@
                                         <div class="tab-pane" id="user-{{ user.id }}-ct" role="tabpanel"
                                              tabindex="0">
                                             <div class="table-responsive">
-                                                <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
+                                                <table id="{{ user.id }}-tasktable-i"
+                                                       class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                                     <tbody>
-                                                    {% for link in user.tasks %}
+                                                    {% for link in user.tasks | sort(attribute="order") %}
                                                         {% if link.complete == True %}
-                                                            <tr>
+                                                            <tr draggable='true' ondragstart='start()'
+                                                                ondragover='dragover()'
+                                                                ondragend="endDrag('{{ user.id }}-tasktable-i')">
+                                                                <td hidden="hidden">{{ link.task.id }}</td>
                                                                 <td>{{ link.task.name }}</td>
                                                                 <td>
                                                                     <a href="{{ url_for("action.unassign_task", task_id=link.task.id, user_id=link.user.id, group="user-" ~ user.id ~ "-modal", tab="user-" ~ user.id ~ "-ct") }}"
@@ -246,11 +250,15 @@
                                         <div class="tab-pane" id="user-{{ user.id }}-it" role="tabpanel"
                                              tabindex="0">
                                             <div class="table-responsive">
-                                                <table class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
+                                                <table id="{{ user.id }}-tasktable-c"
+                                                       class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                                     <tbody>
-                                                    {% for link in user.tasks %}
+                                                    {% for link in user.tasks | sort(attribute="order") %}
                                                         {% if link.complete == False %}
-                                                            <tr>
+                                                            <tr draggable='true' ondragstart='start()'
+                                                                ondragover='dragover()'
+                                                                ondragend="endDrag('{{ user.id }}-tasktable-c')">
+                                                                <td hidden="hidden">{{ link.task.id }}</td>
                                                                 <td>{{ link.task.name }}</td>
                                                                 <td>
                                                                     <a href="{{ url_for("action.unassign_task", task_id=link.task.id, user_id=link.user.id, group="user-" ~ user.id ~ "-modal", tab="user-" ~ user.id ~ "-it") }}"

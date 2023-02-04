@@ -66,11 +66,26 @@
 
         function endDrag(table_id) {
             let csrf = "{{ csrf_token() }}";
-            let rows = document.getElementById(table_id).rows;
             let id = [];
 
-            for (let i = 0; i < rows.length; i++) {
-                id.push(rows[i].cells[0].innerHTML);
+            if(table_id.split("-")[1] === "tasktable") {
+                let user_id = table_id.split("-")[0]
+                let rows = document.getElementById(user_id + "-tasktable-i").rows
+                let rows2 = document.getElementById(user_id + "-tasktable-c").rows
+
+                for (let i = 0; i < rows.length; i++) {
+                    id.push(rows[i].cells[0].innerHTML);
+                }
+
+                for (let i = 0; i < rows2.length; i++) {
+                    id.push(rows2[i].cells[0].innerHTML);
+                }
+            } else {
+                let rows = document.getElementById(table_id).rows;
+
+                for (let i = 0; i < rows.length; i++) {
+                    id.push(rows[i].cells[0].innerHTML);
+                }
             }
 
             $.ajax({

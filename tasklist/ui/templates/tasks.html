@@ -44,8 +44,7 @@
             <div class="container fs-3 text-light text-center my-2">{{ user.name }}'s Incomplete Tasks</div>
             <div class="container p-0 my-3">
                 <div class="table-responsive">
-                    <table id="{{ user.id }}-tasktable"
-                           class="table table-light table-hover border border-danger-subtle border-2 text-center">
+                    <table class="table table-light table-hover border border-danger-subtle border-2 text-center">
                         <tbody>
                         {% for link in tasks %}
                             {% if link.complete == False %}
