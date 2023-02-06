@@ -24,7 +24,7 @@ class User(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     order = Column(Integer)
-    tasks = relationship("Link", back_populates="user")
+    tasks = relationship("Link", back_populates="user", order_by="Link.order")
 
     def __init__(self, name):
         self.name = name
@@ -37,7 +37,7 @@ class Task(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     order = Column(Integer)
-    users = relationship("Link", back_populates="task")
+    users = relationship("Link", back_populates="task", order_by="Link.order")
 
     def __init__(self, name):
         self.name = name

@@ -227,7 +227,7 @@
                                                 <table id="{{ user.id }}-tasktable-i"
                                                        class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                                     <tbody>
-                                                    {% for link in user.tasks | sort(attribute="order") %}
+                                                    {% for link in user.tasks %}
                                                         {% if link.complete == True %}
                                                             <tr draggable='true' ondragstart='start()'
                                                                 ondragover='dragover()'
@@ -253,7 +253,7 @@
                                                 <table id="{{ user.id }}-tasktable-c"
                                                        class="table table-light table-hover border border-danger-subtle border-2 text-center my-0">
                                                     <tbody>
-                                                    {% for link in user.tasks | sort(attribute="order") %}
+                                                    {% for link in user.tasks %}
                                                         {% if link.complete == False %}
                                                             <tr draggable='true' ondragstart='start()'
                                                                 ondragover='dragover()'
